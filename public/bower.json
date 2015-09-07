@@ -1,0 +1,20 @@
+{
+  "name": "public",
+  "version": "0.0.0",
+  "authors": [
+    "mikemsrk <min2033@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.2.3",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}
