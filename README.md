@@ -1,15 +1,16 @@
 ## APIs
 
+
 > POST - /upload
 
 Uploads a single photo information to the DB.
-Params - { image_url: str, user_id: int, group_id: int }
 
 > GET - /list/:group_id
 
-List the photos by group ID.
 Params - Query parameter: group_id (int)
 Return - JSON object [{},{},{}]
+List the photos by group ID.
+
 
 > GET - /list
 
