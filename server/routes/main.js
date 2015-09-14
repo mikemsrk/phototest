@@ -8,19 +8,12 @@ var photoController = require('../controllers/photoController');
 // Return - 200
 router.post('/upload', function(req,res){
   console.log(req.body.image_url);
+
   photoController.findOrCreate(req,res)
     .then(function(data){
       console.log('upload successful');
       res.end();
   });
-});
-
-// List  the entire  photos  table in  a JSON  feed  (should include primary key and all columns).
-// Params - null
-// Return - 200
-router.get('/list/', function(req,res){
-  console.log('getting all photos...');
-  photoController.getAllPhotos(req,res);
 });
 
 // List the photos by group ID.
@@ -29,6 +22,14 @@ router.get('/list/', function(req,res){
 router.get('/list/:group_id', function(req,res){
   console.log('getting photos from group...',req.params.group_id);
   photoController.getPhotosByGroup(req.params.group_id,req,res);
+});
+
+// List  the entire  photos  table in  a JSON  feed  (should include primary key and all columns).
+// Params - null
+// Return - 200
+router.get('/list/', function(req,res){
+  console.log('getting all photos...');
+  photoController.getAllPhotos(req,res);
 });
 
 

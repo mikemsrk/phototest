@@ -4,9 +4,7 @@ $(function(){
 
   // var socket = io.connect(window.location.hostname);
   var socket = io.connect('http://localhost:8000'); 
-
   socket.emit('join'); 
-
   socket.on('update',function(){
     // Fetch data from server at /list
     getPhotos();
@@ -54,17 +52,10 @@ $(function(){
 
     console.log(JSON.stringify(data));
 
-    $.ajax({
-      type: "POST",
-      url: '/upload',
-      data: JSON.stringify(data),
-      success: function(res){
-        console.log(res);
-      },
-      error: function(res){
-        console.log('did not work');
-      }
-    });
+    $.post('/upload',data)
+      .done(function(data){
+        console.log(data);
+      })
 
     socket.emit('upload');
   }

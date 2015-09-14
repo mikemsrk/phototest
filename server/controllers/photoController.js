@@ -49,11 +49,18 @@ module.exports = {
   },
 
   getPhotosByGroup: function (group_id, req, res, next) {
-    new Photo({group_id: group_id})
+    new Photo()
       .fetchAll()
-      .then(function(item){ // check if already exists, update if exist
-        if(item){
-          res.status(200).send(item);
+      .then(function(items){ // check if already exists, update if exist
+        if(items){
+          var photos = [];
+
+          for (var i = 0; i < items.models.length; i++) {
+            if(items.models[i].attributes.group_id === parseInt(group_id)){
+              photos.push(items.models[i].attributes);
+            }
+          };
+          res.status(200).send(photos);
         }else{
           res.status(404).end();
         }
