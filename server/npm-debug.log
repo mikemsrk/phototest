@@ -1,0 +1,89 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.36
+4 warn package.json padlet@1.0.0 No description
+5 warn package.json padlet@1.0.0 No repository field.
+6 warn package.json padlet@1.0.0 No README data
+7 verbose readDependencies using package.json deps
+8 verbose install where, deps [ '/Users/mikemsrk/padlet/server',
+8 verbose install   [ 'bcrypt-nodejs',
+8 verbose install     'bluebird',
+8 verbose install     'body-parser',
+8 verbose install     'cookie-parser',
+8 verbose install     'express',
+8 verbose install     'express-session' ] ]
+9 info preinstall padlet@1.0.0
+10 verbose readDependencies using package.json deps
+11 verbose already installed skipping bcrypt-nodejs@0.0.3 /Users/mikemsrk/padlet/server
+12 verbose already installed skipping bluebird@^2.10.0 /Users/mikemsrk/padlet/server
+13 verbose already installed skipping body-parser@^1.13.3 /Users/mikemsrk/padlet/server
+14 verbose already installed skipping cookie-parser@^1.3.5 /Users/mikemsrk/padlet/server
+15 verbose already installed skipping express@^4.13.3 /Users/mikemsrk/padlet/server
+16 verbose already installed skipping express-session@^1.11.3 /Users/mikemsrk/padlet/server
+17 silly resolved []
+18 info build /Users/mikemsrk/padlet/server
+19 verbose linkStuff [ false, false, false, '/Users/mikemsrk/padlet' ]
+20 info linkStuff padlet@1.0.0
+21 verbose linkBins padlet@1.0.0
+22 verbose linkMans padlet@1.0.0
+23 verbose rebuildBundles padlet@1.0.0
+24 verbose rebuildBundles [ 'bcrypt-nodejs',
+24 verbose rebuildBundles   'bluebird',
+24 verbose rebuildBundles   'body-parser',
+24 verbose rebuildBundles   'cookie-parser',
+24 verbose rebuildBundles   'express',
+24 verbose rebuildBundles   'express-session',
+24 verbose rebuildBundles   'mongoose',
+24 verbose rebuildBundles   'mongoose-auto-increment' ]
+25 verbose rebuild bundle /Users/mikemsrk/padlet/server/node_modules/mongoose
+26 info build /Users/mikemsrk/padlet/server/node_modules/mongoose
+27 info preinstall mongoose@4.1.6
+28 verbose linkStuff [ false,
+28 verbose linkStuff   false,
+28 verbose linkStuff   false,
+28 verbose linkStuff   '/Users/mikemsrk/padlet/server/node_modules' ]
+29 info linkStuff mongoose@4.1.6
+30 verbose linkBins mongoose@4.1.6
+31 verbose linkMans mongoose@4.1.6
+32 verbose rebuildBundles mongoose@4.1.6
+33 verbose rebuildBundles [ 'async',
+33 verbose rebuildBundles   'bson',
+33 verbose rebuildBundles   'hooks-fixed',
+33 verbose rebuildBundles   'kareem',
+33 verbose rebuildBundles   'mongodb',
+33 verbose rebuildBundles   'mpath',
+33 verbose rebuildBundles   'mpromise',
+33 verbose rebuildBundles   'mquery',
+33 verbose rebuildBundles   'ms',
+33 verbose rebuildBundles   'muri',
+33 verbose rebuildBundles   'regexp-clone',
+33 verbose rebuildBundles   'sliced' ]
+34 info install mongoose@4.1.6
+35 info postinstall mongoose@4.1.6
+36 verbose rebuild bundle /Users/mikemsrk/padlet/server/node_modules/mongoose-auto-increment
+37 info build /Users/mikemsrk/padlet/server/node_modules/mongoose-auto-increment
+38 info preinstall mongoose-auto-increment@4.0.0
+39 verbose linkStuff [ false,
+39 verbose linkStuff   false,
+39 verbose linkStuff   false,
+39 verbose linkStuff   '/Users/mikemsrk/padlet/server/node_modules' ]
+40 info linkStuff mongoose-auto-increment@4.0.0
+41 verbose linkBins mongoose-auto-increment@4.0.0
+42 verbose linkMans mongoose-auto-increment@4.0.0
+43 verbose rebuildBundles mongoose-auto-increment@4.0.0
+44 verbose rebuildBundles [ 'extend' ]
+45 info install mongoose-auto-increment@4.0.0
+46 info postinstall mongoose-auto-increment@4.0.0
+47 info install padlet@1.0.0
+48 info postinstall padlet@1.0.0
+49 info prepublish padlet@1.0.0
+50 error peerinvalid The package mongoose does not satisfy its siblings' peerDependencies requirements!
+50 error peerinvalid Peer mongoose-auto-increment@4.0.0 wants mongoose@~4.0.0
+51 error System Darwin 14.3.0
+52 error command "node" "/usr/local/bin/npm" "install"
+53 error cwd /Users/mikemsrk/padlet/server
+54 error node -v v0.10.36
+55 error npm -v 1.4.28
+56 error code EPEERINVALID
+57 verbose exit [ 1, true ]
