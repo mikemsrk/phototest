@@ -2,8 +2,8 @@ $(function(){
 
   getPhotos();
 
-  // var socket = io.connect(window.location.hostname);
-  var socket = io.connect('http://localhost:8000'); 
+  var socket = io.connect(window.location.hostname);
+  // var socket = io.connect('http://localhost:8000'); 
   socket.emit('join'); 
   socket.on('update',function(){
     // Fetch data from server at /list
