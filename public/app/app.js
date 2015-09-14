@@ -1,8 +1,14 @@
 $(function(){
 
   getPhotos();
-  var socket = io.connect(window.location.hostname);
-  // var socket = io.connect('http://localhost:8000'); 
+  var socket;
+
+  if(window.location.hostname === 'localhost'){
+    socket = io.connect('http://localhost:8000'); 
+  }else{
+    socket = io.connect(window.location.hostname);
+  }
+
   socket.emit('join'); 
   socket.on('update',function(){
     // Fetch data from server at /list
@@ -15,10 +21,8 @@ $(function(){
     var groupId = parseInt($('#groupId').val());
     var image_url = $('#imageUrl').val();
 
-    if(validate(userId,'number') && validate(groupId,'number') && validate(image_url,'string')){
+    if(validate(userId,'number',$('#userId')) && validate(groupId,'number',$('#groupId')) && validate(image_url,'string',$('#imageUrl'))){
       uploadPhoto(userId,groupId,image_url);
-    }else{
-      alert('Incorrect/blank values');
     }
 
     $('#userId').val('');
@@ -26,17 +30,21 @@ $(function(){
     $('#imageUrl').val('');
   });
 
-  function validate(value,type){
+  function validate(value,type,obj){
     if(type === 'string'){
       if(typeof value === 'string' && value.length > 0){
+        obj.closest('div').removeClass('has-error');
         return true;
       }else{
+        obj.closest('div').addClass('has-error');
         return false;
       }
     }else if(type === 'number'){
       if(value && typeof value === 'number'){
+        obj.closest('div').removeClass('has-error');
         return true;
       }else{
+        obj.closest('div').addClass('has-error');
         return false;
       }
     }
