@@ -1,34 +1,65 @@
-var path = require('path');
-var mongoose = require('mongoose');
+var dbUrl = {};
 
-if(process.env.PORT){
-  mongoose.connect('mongodb://MongoLab-4:hbr_o1kgEOz63XBvflkBNKM0R1HTYCQ24eNB_2S5FrY-@ds036698.mongolab.com:36698/MongoLab-4');
+if(process.env.NODE_ENV == "production"){
+  dbUrl.deploy = true; // FALSE = LOCAL
 }else{
-  mongoose.connect('mongodb://localhost/test');
+  dbUrl.deploy = false; // TRUE = DEPLOYED
 }
 
-var db = mongoose.connection;
-var Schema = mongoose.Schema;
+var url_parse = function(url){ // Parse the deployment mysql server params
+  if(url){
+    dbUrl.user = url.split(':')[1].substring(2);
+    dbUrl.password = url.split(':')[2].split("@")[0];
+    dbUrl.host = url.split('@')[1].split("/")[0];
+    dbUrl.database = url.split('/')[3].split("?")[0];
+  }
+};
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function (callback) {
-  console.log('mongodb connection: successful');
+url_parse(process.env.CLEARDB_DATABASE_URL);
+
+var knex;
+
+if(dbUrl.deploy){
+  knex = require('knex')({
+    client: 'mysql',
+    connection: {
+      host: dbUrl.host,
+      user: dbUrl.user,
+      password: dbUrl.password,
+      database: dbUrl.database,
+      charset: 'utf8'
+    }
+  });
+}else{
+  knex = require('knex')({
+    client: 'mysql',
+    connection: {
+      host: '127.0.0.1',
+      user: 'root',
+      password: '',
+      database: 'padlet',
+      charset: 'utf8'
+    }
+  });
+}
+
+
+var db = require('bookshelf')(knex);
+db.plugin('registry');
+
+db.knex.schema.hasTable('photos').then(function(exists) {
+  if (!exists) {
+    db.knex.schema.createTable('photos', function (photo) {
+      photo.increments('id').primary();
+      photo.string('image_url', 255).unique();
+      photo.integer('user_id');
+      photo.integer('group_id');
+      photo.integer('views').defaultTo(0);
+      photo.timestamps();
+    }).then(function (table) {
+      console.log('Created Table', table);
+    });
+  }
 });
 
-exports.counterSchema = Schema({
-    _id: {type: String, required: true},
-    seq: { type: Number, default: 0 }
-});
-
-exports.userSchema = new Schema({
-  userId: {type: String},
-  username: String,
-  password: String
-});
-
-exports.photoSchema = new Schema({
-  image_url: String,
-  user_id: Number,
-  group_id: Number,
-  views: Number
-});
+module.exports = db;

@@ -4,8 +4,6 @@ var session = require('express-session');
 
 module.exports = function(app,express){
 
-  // OAuth Required Libraries.
-  // app.use(methodOverride());
   app.use(cookieParser());
   app.use(session({
     secret: 'shhh, it\'s a secret',

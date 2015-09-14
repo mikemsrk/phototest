@@ -1,32 +1,45 @@
 var express = require('express');
+var app = express();
 var router = express.Router();
 var photoController = require('../controllers/photoController');
 
-
-// Accept  an  image attachment  as  well  as  user_id and group_id  parameter.
-// The image should  be  uploaded  to  Amazon  S3  (you  can create  a free  account)  or  a similar 
-// cloud storage service.  Alternatively if  you don't have  access  to  a cloud storage account,  
-// provide a way to  pass  an  image_url parameter as  a string. 
-// The user_id,  group_id  and image_url (either the provided  string  or  the URL of  the uploaded  
-// image)  should  create  a new entry in  the photos  table.
+// Uploads a single photo information to the DB.
+// Params - { image_url: str, user_id: int, group_id: int }
+// Return - 200
 router.post('/upload', function(req,res){
-  console.log('attempting to upload photo info.');
-  photoController.savePhoto(req,res);
+  console.log(req.body.image_url);
+  photoController.findOrCreate(req,res)
+    .then(function(data){
+      console.log('upload successful');
+      res.end();
+  });
 });
 
 // List  the entire  photos  table in  a JSON  feed  (should include primary key and all columns).
-// If  a parameter is  provided  (i.e. /list/2), filter  for that  group_id  (i.e. 2).
-router.get('/list', function(req,res){
+// Params - null
+// Return - 200
+router.get('/list/', function(req,res){
+  console.log('getting all photos...');
+  photoController.getAllPhotos(req,res);
+});
 
-
+// List the photos by group ID.
+// Params - Query parameter: group_id (int)
+// Return - JSON object [{},{},{}]
+router.get('/list/:group_id', function(req,res){
+  console.log('getting photos from group...',req.params.group_id);
+  photoController.getPhotosByGroup(req.params.group_id,req,res);
 });
 
 
 // Accept  a parameter that  looks up  the database  entry by  primary key (i.e. /view/12  returns row 12).  
 // Should  return  the image from  specified in  image_url and increment the object's  'views'  column  by  1.
-router.get('/view/:id', function(req,res){
 
-
+// Params - Query parameter: photo_id (int)
+// Return - JSON object {}
+router.get('/view/:photo_id', function(req,res){
+  console.log('getting individual photo',req.params.photo_id);
+  photoController.getPhoto(req.params.photo_id,req,res);
 });
 
 
