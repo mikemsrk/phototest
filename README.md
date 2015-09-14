@@ -1,26 +1,26 @@
-APIs
+## APIs
 
-POST - /upload
+> POST - /upload
 
-// Uploads a single photo information to the DB.
-// Params - { image_url: str, user_id: int, group_id: int }
+Uploads a single photo information to the DB.
+Params - { image_url: str, user_id: int, group_id: int }
 
-GET - /list/:group_id
+> GET - /list/:group_id
 
-// List the photos by group ID.
-// Params - Query parameter: group_id (int)
-// Return - JSON object [{},{},{}]
+List the photos by group ID.
+Params - Query parameter: group_id (int)
+Return - JSON object [{},{},{}]
 
-GET - /list
+> GET - /list
 
-// List  the entire  photos  table in  a JSON  feed  (should include primary key and all columns).
-// Params - null
-// Return - 200
+List  the entire  photos  table in  a JSON  feed  (should include primary key and all columns).
+Params - null
+Return - 200
 
-GET - /view/:photo_id
+> GET - /view/:photo_id
 
-// Accept  a parameter that  looks up  the database  entry by  primary key (i.e. /view/12  returns row 12).  
-// Should  return  the image from  specified in  image_url and increment the object's  'views'  column  by  1.
+Accept  a parameter that  looks up  the database  entry by  primary key (i.e. /view/12  returns row 12).  
+Should  return  the image from  specified in  image_url and increment the object's  'views'  column  by  1.
 
-// Params - Query parameter: photo_id (int)
-// Return - JSON object {}
+Params - Query parameter: photo_id (int)
+Return - JSON object {}
