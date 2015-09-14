@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
+var io = require('../server.js');
 var photoController = require('../controllers/photoController');
 
 // Uploads a single photo information to the DB.
@@ -12,6 +13,7 @@ router.post('/upload', function(req,res){
   photoController.findOrCreate(req,res)
     .then(function(data){
       console.log('upload successful');
+      io.emit('update');
       res.end();
   });
 });
@@ -29,7 +31,12 @@ router.get('/list/:group_id', function(req,res){
 // Return - 200
 router.get('/list/', function(req,res){
   console.log('getting all photos...');
-  photoController.getAllPhotos(req,res);
+  photoController.getAllPhotos(req,res)
+    .then(function(photos){
+      //Fetch done
+      console.log('fetch done');
+      res.status(200).send(photos);
+    });
 });
 
 

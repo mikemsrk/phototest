@@ -6,22 +6,14 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var bodyParser = require('body-parser');
 
+module.exports = io;
+
 require('./lib/middleware.js')(app, express); // load up all middlewares
 
 //listen for client connections
 io.on('connection', function(user) {
-
   console.log('client connected.');
-
-  // When user uploads a photo, broadcast event to fetch new data from server.
-  user.on('upload',function(){
-    console.log('upload event received');
-    user.emit('update');
-    user.broadcast.emit('update');
-  });
 });
-
-
 
 var authRouter = require('./routes/auth'); // Authentication not implemented.
 var mainRouter = require('./routes/main');

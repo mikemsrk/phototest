@@ -31,21 +31,26 @@ module.exports = {
     new Photo({id: photo_id})
       .fetch()
       .then(function (photo) {
-        photo.attributes.views = parseInt(photo.attributes.views+1);
-        photo.save().then(function(){
-          console.log('view updated!');
-          res.status(200).send(photo);
-        });
+        if(photo){
+          photo.attributes.views = parseInt(photo.attributes.views+1);
+          photo.save().then(function(){
+            console.log('view updated!');
+            res.status(200).send(photo);
+          });
+        }else{
+          res.status(404).send('not found');
+        }
       });
   },
 
   getAllPhotos: function (req, res, next) {
-    new Photo()
-      .fetchAll({
-      })
-      .then(function (photos) {
-        res.status(200).send(photos);
-      });
+    return new Promise(function(resolve, reject) {
+      new Photo()
+        .fetchAll({})
+        .then(function (photos) {
+          resolve(photos);
+        }).catch(reject);
+    });
   },
 
   getPhotosByGroup: function (group_id, req, res, next) {

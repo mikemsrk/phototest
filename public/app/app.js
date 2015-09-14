@@ -1,9 +1,8 @@
 $(function(){
 
   getPhotos();
-
-  var socket = io.connect(window.location.hostname);
-  // var socket = io.connect('http://localhost:8000'); 
+  // var socket = io.connect(window.location.hostname);
+  var socket = io.connect('http://localhost:8000'); 
   socket.emit('join'); 
   socket.on('update',function(){
     // Fetch data from server at /list
@@ -12,16 +11,36 @@ $(function(){
 
   $('#photoForm').on('submit',function(e){
     e.preventDefault();
-    var userId = $('#userId');
-    var groupId = $('#groupId');
-    var image_url = $('#imageUrl');
+    var userId = parseInt($('#userId').val());
+    var groupId = parseInt($('#groupId').val());
+    var image_url = $('#imageUrl').val();
 
-    uploadPhoto(userId.val(),groupId.val(),image_url.val());
+    if(validate(userId,'number') && validate(groupId,'number') && validate(image_url,'string')){
+      uploadPhoto(userId,groupId,image_url);
+    }else{
+      alert('Incorrect/blank values');
+    }
 
-    userId.val('');
-    groupId.val('');
-    image_url.val('');
+    $('#userId').val('');
+    $('#groupId').val('');
+    $('#imageUrl').val('');
   });
+
+  function validate(value,type){
+    if(type === 'string'){
+      if(typeof value === 'string' && value.length > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }else if(type === 'number'){
+      if(value && typeof value === 'number'){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  }
 
   function getPhotos(){
     $.ajax({
@@ -49,8 +68,6 @@ $(function(){
       group_id: groupId,
       image_url: image_url
     };
-
-    console.log(JSON.stringify(data));
 
     $.post('/upload',data)
       .done(function(data){
