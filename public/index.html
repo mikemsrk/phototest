@@ -1,6 +1,6 @@
 <!DOCTYPE>
 
-<html>
+<html ng-app="photo">
   <head>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style/main.css">
@@ -8,42 +8,39 @@
 
   <body>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/aws-sdk-js/dist/aws-sdk.min.js"></script>
     <script src="app/socket-io.js"></script>
+    <script src="app/controllers/PhotoController.js"></script>
+    <script src="app/services/PhotoService.js"></script>
+    <script src="app/directives/directives.js"></script>
     <script src="app/app.js"></script>
 
+
+
     <div class="container">
-      <form id="photoForm">
-        <div class="form-group">
-          <label for="userId">UserID</label>
-          <input class="form-control" id="userId" placeholder="1">
-        </div>
-        <div class="form-group">
-          <label for="groupId">GroupID</label>
-          <input class="form-control" id="groupId" placeholder="3">
-        </div>
-        <div class="form-group">
-          <label for="imageUrl">ImageURL</label>
-          <input class="form-control" id="imageUrl" placeholder="http://imgur.com/sk2h3.png">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
 
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">FotoUp</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
 
-      <table class="table">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <td>UserID</td>
-            <td>GroupID</td>
-            <td>Image</td>
-          </tr>
-        </thead>
-
-        <tbody class="image-content">
-
-        </tbody>
-      </table>
-
+      <div ui-view></div>
     </div>
   </body>
 

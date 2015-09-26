@@ -1,0 +1,41 @@
+<form id="photoControls">
+  <input class="bottom-marg-15" type="file" name="file" file></input>         
+  <a class="btn btn-success btn-block btn-sm" ng-click="upload()">Upload</a>
+  <a class="btn btn-primary btn-block btn-sm" ng-click="refresh()">Refresh</a>
+</form>
+
+<div class="images">
+  <img ng-repeat="image in images" class="img-responsive" src={{image.url}}></img>
+</div>
+
+<!-- <form id="photoForm">
+  <div class="form-group">
+    <label for="userId">UserID</label>
+    <input class="form-control" id="userId" placeholder="1">
+  </div>
+  <div class="form-group">
+    <label for="groupId">GroupID</label>
+    <input class="form-control" id="groupId" placeholder="3">
+  </div>
+  <div class="form-group">
+    <label for="imageUrl">ImageURL</label>
+    <input class="form-control" id="imageUrl" placeholder="http://imgur.com/sk2h3.png">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+
+<table class="table">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>UserID</td>
+      <td>GroupID</td>
+      <td>Image</td>
+    </tr>
+  </thead>
+
+  <tbody class="image-content">
+
+  </tbody>
+</table> -->

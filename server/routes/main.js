@@ -3,6 +3,14 @@ var app = express();
 var router = express.Router();
 var io = require('../server.js');
 var photoController = require('../controllers/photoController');
+var creds = require('../lib/creds');
+
+// Returns AWS S3 Creds for requests
+router.get('/api/creds', function(req,res){
+  console.log('getting AWS S3 creds...');
+  res.send(creds);
+});
+
 
 // Uploads a single photo information to the DB.
 // Params - { image_url: str, user_id: int, group_id: int }

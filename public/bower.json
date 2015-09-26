@@ -14,6 +14,9 @@
   ],
   "dependencies": {
     "jquery": "~2.1.4",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "aws-sdk-js": "~2.2.4",
+    "angular": "~1.4.6",
+    "ui-router": "~0.2.15"
   }
 }
