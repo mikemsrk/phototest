@@ -2,7 +2,7 @@ angular.module('photo.photos',['photo.services'])
 
 .controller('PhotoController',function($scope,PhotoReq){
 
-  $scope.creds;
+  $scope.creds = {};
   $scope.images = [];
   var bucket;
 
@@ -26,7 +26,7 @@ angular.module('photo.photos',['photo.services'])
         $scope.images = [];
         for (var i = 1; i < data.Contents.length; i++) {
           $scope.images.push({url:'http://dropbucket-mikemsrk.s3.amazonaws.com/' + data.Contents[i].Key});
-        };
+        }
         $scope.$apply();
       }
     });
